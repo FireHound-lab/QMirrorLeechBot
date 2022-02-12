@@ -35,7 +35,7 @@ def saveWebPage(pageurl:str):
     try:
         wayback = waybackpy.Url(pageurl, user_agent)
         archive = wayback.save()
-        LOGGER.info("wayback success for: " + pageurl)
+        LOGGER.info(f'wayback success for: {pageurl}')
         return archive.archive_url
     except Exception as r:
         LOGGER.error("wayback unsuccess for: " + pageurl + " , " + str(r))

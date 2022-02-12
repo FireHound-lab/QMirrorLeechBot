@@ -33,19 +33,15 @@ def TimeFormatter(milliseconds: int) -> str:
 
 
 def hash(update, context):
-    message = update.effective_message
-    mediamessage = message.reply_to_message
     help_msg = "<b>Reply to message including file:</b>"
     help_msg += f"\n<code>/{BotCommands.HashCommand}" + " {message}" + "</code>"
+    message = update.effective_message
+    mediamessage = message.reply_to_message
     if not mediamessage: return sendMessage(help_msg, context.bot, update)
-    file = None
     media_array = [mediamessage.document, mediamessage.video, mediamessage.audio, mediamessage.document, \
         mediamessage.video, mediamessage.photo, mediamessage.audio, mediamessage.voice, \
         mediamessage.animation, mediamessage.video_note, mediamessage.sticker]
-    for i in media_array:
-        if i is not None:
-            file = i
-            break
+    file = next((i for i in media_array if i is not None), None)
     if not file: return sendMessage(help_msg, context.bot, update)
     VtPath = os.path.join("Hasher", str(message.from_user.id))
     if not os.path.exists("Hasher"): os.makedirs("Hasher")
