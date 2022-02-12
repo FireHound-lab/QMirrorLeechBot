@@ -120,7 +120,7 @@ def get_readable_message():
             tasks = len(download_dict)
             global pages
             pages = ceil(tasks/STATUS_LIMIT)
-            if PAGE_NO > pages and pages != 0:
+            if PAGE_NO > pages != 0:
                 globals()['COUNT'] -= STATUS_LIMIT
                 globals()['PAGE_NO'] -= 1
             START = COUNT

@@ -113,10 +113,10 @@ def setThumb(update, context):
             DbManger().user_save_thumb(user_id, des_dir)
         msg = f"Custom thumbnail saved for: <a href='tg://user?id={user_id}'>{update.message.from_user.full_name}</a> (<code>{str(user_id)}</code>)"
         todel = sendMessage(msg, context.bot, update)
-        Thread(target=auto_delete_message, args=(context.bot, update.message, todel)).start()
     else:
         todel = sendMessage("Reply to a photo to save custom thumbnail.", context.bot, update)
-        Thread(target=auto_delete_message, args=(context.bot, update.message, todel)).start()
+
+    Thread(target=auto_delete_message, args=(context.bot, update.message, todel)).start()
 
 leech_set_handler = CommandHandler(BotCommands.LeechSetCommand, leechSet, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 set_thumbnail_handler = CommandHandler(BotCommands.SetThumbCommand, setThumb, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
